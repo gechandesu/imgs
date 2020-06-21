@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <!--Style BEGIN-->
+    <style>
+        body {
+            background-color: #fff;
+            font-family: Ubuntu Mono;
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        a a:visited {color: blue;}
+        button {
+            background-color: white;
+            vertical-align: bottom;
+            border: none;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+        }
+        img {
+            width:100%;
+            object-fit:cover;
+        }
+        .content-box {
+            margin-top: 10%;
+        }
+        .submitfile {
+            margin-top: 25%;
+            border-color: #e1e1e1;
+            border-style: dotted;
+        }
+        .inputfile {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        .inputfile + label {
+            color: black;
+            display: inline-block;
+            margin: 4rem;
+            cursor: pointer; /* "hand" cursor */
+        }
+        .inputfile:focus + label {
+        	outline: 1px dotted #000;
+        	outline: -webkit-focus-ring-color auto 5px;
+        }
+    </style>
+    <!--Style END-->
+</head>
+<body>
+
+<div class='content-box'>
+    {% block content %}
+    {% endblock%}
+</div>
+
+</body>
+</html>
