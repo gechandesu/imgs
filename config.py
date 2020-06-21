@@ -4,4 +4,3 @@ class Config(object):
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp', 'gif'} # Не реализован
     RANDOM_NAME_LEN = 5
-    SECRET_KEY = 'NJtane@%!$^^*seg4657Q#&$&$#rnymetbvsevvwefhJTMT,mner' # Не реализован
