@@ -1,6 +1,6 @@
 import os
 from imgs import app, GetImageName
-from flask import render_template, request, url_for, redirect, send_from_directory
+from flask import render_template, request, url_for, send_from_directory
 
 @app.route('/')
 def index():
