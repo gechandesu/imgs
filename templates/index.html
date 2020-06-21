@@ -7,7 +7,7 @@ imgs
 {% block content %}
 
 <!--Form BEGIN-->
-<div class='submitfile' id="dropContainer">
+<div class='submitfile'>
     <form method = 'POST' action = '{{url_for('uploader')}}' enctype='multipart/form-data'>
         <input class='inputfile' type='file' onchange="this.form.submit();" name='image' id='image' accept='.jpg,.jpeg,.png,.webp,.gif'>
         <label id='inputlabel' for='image'><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="butt" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/></svg><br><p>Choose file to upload!</p></label>
@@ -15,23 +15,29 @@ imgs
 </div>
 <!--Form END-->
 
+{%- if Uploaded=="true" -%}
+<!--Copy to clipboard BEGIN-->
+<p id="copy-to-clipboard">
+    <input type="text" value="{{ ImageURL }}" id="url-input">
+    <button onclick="CopyToClipboard()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+<p>
+
 <script>
-dropContainer.ondragover = dropContainer.ondragenter = function(evt) {
-  evt.preventDefault();
-};
+    function CopyToClipboard() {
+        /* Get the text field */
+        var copyText = document.getElementById("url-input");
 
-dropContainer.ondrop = function(evt) {
-  // pretty simple -- but not for IE :(
-  fileInput.files = evt.dataTransfer.files;
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
 
-  // If you want to use some of the dropped files
-  const dT = new DataTransfer();
-  dT.items.add(evt.dataTransfer.files[0]);
-  dT.items.add(evt.dataTransfer.files[3]);
-  fileInput.files = dT.files;
-
-  evt.preventDefault();
-};
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+    }
 </script>
+<!--Copy to clipboard END-->
+
+<img src="{{ ImageURL }}" alt="{{ ImageURL }}" width="640">
+{% endif %}
 
 {% endblock%}

@@ -1,7 +1,7 @@
 import os
 from config import Config
 from imgs import app, GetImageName
-from flask import render_template, request, url_for, redirect, send_from_directory, flash
+from flask import render_template, request, url_for, redirect, send_from_directory
 
 @app.route('/')
 def index():
@@ -13,7 +13,7 @@ def uploader():
             image = request.files['image']
             imagename = GetImageName(image)
             image.save(os.path.join(app.config['UPLOADS_FOLDER'], imagename))
-        return render_template('uploaded.html', ImageURL=request.base_url+imagename)
+        return render_template('index.html', ImageURL=request.base_url+imagename, Uploaded="true")
 
 @app.route('/<imagename>')
 def getimage(imagename):

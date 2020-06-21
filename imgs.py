@@ -13,7 +13,3 @@ def GetRandomName():
 
 def GetImageName(imageObj):
     return GetRandomName()+'.'+imageObj.filename.rsplit('.', 1)[1].lower()
-
-# def GetImage(imageName):
-    # return send_from_directory(app.config['UPLOADS_FOLDER'], imageName)
-

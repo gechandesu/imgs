@@ -30,10 +30,9 @@
             object-fit:cover;
         }
         .content-box {
-            margin-top: 10%;
+            margin: 10% 0;
         }
         .submitfile {
-            margin-top: 25%;
             border-color: #e1e1e1;
             border-style: dotted;
         }
@@ -49,11 +48,21 @@
             color: black;
             display: inline-block;
             margin: 4rem;
-            cursor: pointer; /* "hand" cursor */
+            cursor: pointer;
         }
         .inputfile:focus + label {
         	outline: 1px dotted #000;
         	outline: -webkit-focus-ring-color auto 5px;
+        }
+        #copy-to-clipboard {
+            margin: 3rem 0;
+        }
+        #url-input {
+            padding: 4px;
+            border: 1px solid #e1e1e1;
+            border-radius: 4px;
+            /*border: none;
+            border-bottom: 1.5px solid #000;*/
         }
     </style>
     <!--Style END-->
