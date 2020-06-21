@@ -13,7 +13,7 @@ def uploader():
             image = request.files['image']
             imagename = GetImageName(image)
             image.save(os.path.join(app.config['UPLOADS_FOLDER'], imagename))
-        return render_template('uploaded.html', ImageURL='https://'+request.remote_addr+'/'+imagename)
+        return render_template('uploaded.html', ImageURL='https://'+request.base_url+'/'+imagename)
 
 @app.route('/<imagename>')
 def getimage(imagename):
