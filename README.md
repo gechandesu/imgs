@@ -1,8 +1,14 @@
 # imgs
 
-imgs is simple and minimalictic image sharing web app written in Python using Flask with nice interface. No database. No compression. No time limits. No additional dependencies.
+imgs is simple and minimalictic image sharing web app written in Python using Flask. No database. No image compression. No time limits. No additional dependencies.
 
 The application does not save records about image URLs. Immediately after loading the image, you can copy the direct link and use it anywhere.
+
+This software is intended for personal use and is not suitable for creating a public image hosting. Please do not try to use it for this.
+
+## Usage
+
+TODO
 
 ## Installation
 
@@ -26,7 +32,7 @@ git clone https://github.com/gechandesu/imgs
 cd imgs
 ```
 
-Edit the `config.py`. Change path to `UPLOADS_FOLDER` and set `APP_URL`. It's `http://127.0.0.1:5000/` as default.
+Edit the `config.py`. Change path to `UPLOADS_FOLDER` and set `APP_URL`. It's `http://127.0.0.1:5000/` by default.
 
 ```
 APP_URL = 'http://127.0.0.1:5000/' # "/" in end is important!
@@ -43,3 +49,10 @@ Check the http://127.0.0.1:5000/ in browser. You can already upload pictures to 
 
 You can also deploy it on the server in a typical Flask manner. As an example with uWSGI+Nginx. Read the Flask docs: [https://flask.palletsprojects.com/en/1.1.x/deploying/uwsgi/](https://flask.palletsprojects.com/en/1.1.x/deploying/uwsgi/).
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
+## License
+
+This code is published under Unlicense. See [LICENSE.md](LICENSE.md).
