@@ -42,7 +42,7 @@ UPLOADS_FOLDER = '/mnt/develop/imgs/imgs/uploads/'```
 Run imgs:
 
 ```
-python3 imgs.py
+python3 main.py
 ```
 
 Check the http://127.0.0.1:5000/ in browser. You can already upload pictures to the application.
