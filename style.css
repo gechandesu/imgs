@@ -1,0 +1,85 @@
+body {
+    background-color: #fff;
+    font-family: 'Ubuntu Mono', monospace;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+main { margin: 4rem 2rem; }
+.not-found, .bad-mime-type { margin-bottom: 2rem; }
+
+a, a:visited { color: #000; }
+
+img { width: 100%; }
+
+/* Drag and Drop */
+.drop-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8rem;
+    padding: 25px;
+    border: 3px dashed #e1e1e1;
+}
+
+.drop-area.dragover { border-color: #000; }
+
+.file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    align-items: center;
+    opacity: 0;
+}
+
+.file-input-label {
+    display: block;
+    margin-top: 1rem;
+}
+
+/* Copy to clipboard */
+.copy-to-clipboard {
+    display: flex;
+    margin: 2rem 0;
+    border: 1px solid #000000;
+}
+
+.copy-to-clipboard input[type=text] {
+    flex: 50%;
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    outline: none;
+}
+
+.copy-to-clipboard button {
+    padding: 12px 20px;
+    margin: 0;
+    min-width: 120px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* cURL command */
+.curl pre {
+    text-align: left;
+    padding: 12px 20px;
+    font-size: 14px;
+    background: #000000;
+    color: #ffffff;
+    overflow-x: auto;
+}
+
+.logo pre {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+}

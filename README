@@ -1,0 +1,30 @@
+ __
+|__| _____   ____  ______
+|  |/     \ / ___\/  ___/
+|  |  Y Y  / /_/  \___ \
+|__|__|_|  \___  /____  >
+         \/_____/     \/
+
+imgs is a minimalictic image sharing web app written with Bottle framework.
+
+No database. No image compression. No time limits. No additional dependencies.
+
+Features:
+* Upload images via Drag&Drop
+* Easy copy share link
+* MIME type detecting
+
+Installation
+============
+
+See deployment options in Bottle documentation: https://bottlepy.org/docs/dev/deployment.html
+
+For local installation run:
+
+$ python3 -m venv env
+$ source env/bin/activate
+$ pip install bottle
+$ git clone https://github.com/gechandesu/imgs.git
+$ python3 imgs/imgs.py
+
+Edit the imgs.ini.
