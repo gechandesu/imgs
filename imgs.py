@@ -91,5 +91,7 @@ def send_image(image_name):
 def send_style():
     return static_file('style.css', root = './')
 
+app = app()  # Create WSGI application
+
 if __name__ == '__main__':
     run()
