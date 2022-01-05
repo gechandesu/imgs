@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# This is an imgs <https://gitea.gch.icu/ge/imgs> "integration" for Nautilus.
+# Place this script into path: $HOME/.local/share/nautilus/scripts
+# See more info at: <https://help.ubuntu.com/community/NautilusScriptsHowto>
+
+imgs_check_vars() {
+    [ "$IMGSLOG" ] || IMGSLOG=$HOME/imgs_debug.log
+    [ "$IMGSREMOTE" ] && return 0  # exit from func if variable is set
+
+    if [ -f "$HOME/.imgsremote" ]; then
+        . $HOME/.imgsremote
+    fi
+
+    if [ "$IMGSREMOTE" ]; then
+        :
+    else
+        echo "$0: Error: IMGSREMOTE variable is not set." >&2
+        exit 1
+    fi
+}
+
+[ "$IMGSDEBUG" ] && date +"[%d %b %Y %H:%M:%S] Started" >> "$IMGSLOG"
+
+while read -r file; do
+    [ "$file" ] || break
+    if [ "$IMGSDEBUG" ]; then
+        image="$(curl -v -L -F "image=@$file" "$IMGSREMOTE" 2>&1 | tee -a "$IMGSLOG")"
+        image="$(tail -n 1 <<< "$image")"
+    else
+        image="$(curl -L -F "image=@$file" "$IMGSREMOTE")"
+    fi
+    [ "$IMGSDEBUG" ] && echo "$(date +"[%d %b %Y %H:%M:%S]") $file --> $image" >> "$IMGSLOG"
+    notify-send "File uploaded to imgs!" "$image"
+done <<< "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS"
+
+[ "$IMGSDEBUG" ] && date +"[%d %b %Y %H:%M:%S] Finished" >> "$IMGSLOG"

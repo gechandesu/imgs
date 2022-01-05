@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+# imgs CLI client.
+# Home page: <https://gitea.gch.icu/ge/imgs>
+
+imgs_usage() {
+	cat <<- EOF
+	Upload images to remote imgs server.
+
+	Usage: imgs [--version] [--help] [-r | --remote <URL>] <file>...
+
+	Options:
+	    -r, --remote    remote imgs instance URI. Example:
+	                    'https://user:password@example.org'
+	    --version       print version and exit.
+	    --help          print this help message and exit.
+
+	Environment variables:
+	    IMGSREMOTE      remote imgs instance URI.
+	    IMGSDEBUG       enables verbose mode and logging.
+	    IMGSLOG         path to logfile. Default: ~/imgs_debug.log
+
+	You can set variables in ~/.imgsremote file instead of ~/.bashrc
+	See <https://gitea.gch.icu/ge/imgs> for more info.
+	EOF
+    exit 0
+}
+
+imgs_check_vars() {
+    [ "$IMGSLOG" ] || IMGSLOG=$HOME/imgs_debug.log
+    [ "$IMGSREMOTE" ] && return 0  # exit from func if variable is set
+
+    if [ -f "$HOME/.imgsremote" ]; then
+        . $HOME/.imgsremote
+    fi
+
+    if [ "$IMGSREMOTE" ]; then
+        :
+    else
+        echo "$0: Error: IMGSREMOTE variable is not set." >&2
+        exit 1
+    fi
+}
+
+[[ "$@" ]] || imgs_usage
+while (( "$#" )); do
+    case "$1" in
+        -r|--remote) if [ "$2" ] && [ "${2:0:1}" != '-' ]; then
+                        IMGSREMOTE="$2"; shift
+                     else
+                        echo "$0: missing argument for $1" >&2; exit 1
+                     fi; shift;;
+        --version) echo 'imgs CLI 1.0'; exit 0;;
+        --help) imgs_usage;;
+        -*) echo "$0: $1: bad option" >&2; exit 1;;
+        *) [ -f "$1" ] || { echo "$0: $1: no such file" >&2; exit 1; }
+            _files+=("$1"); shift;;
+    esac
+done
+
+imgs_check_vars
+
+[ "$IMGSDEBUG" ] && date +"[%d %b %Y %H:%M:%S] Started" | tee -a "$IMGSLOG"
+
+for file in "${_files[@]}"; do
+    filepath="$(realpath "$file")"
+    if [ "$IMGSDEBUG" ]; then
+        echo "Uploading $filepath" | tee -a "$IMGSLOG"
+        curl -v -L -F "image=@/$filepath" "$IMGSREMOTE" 2>&1 | tee -a "$IMGSLOG"
+    else
+        curl -L -F "image=@/$filepath" "$IMGSREMOTE"
+    fi
+done
+
+[ "$IMGSDEBUG" ] && date +"[%d %b %Y %H:%M:%S] Finished" | tee -a "$IMGSLOG"
