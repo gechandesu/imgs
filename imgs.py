@@ -90,4 +90,4 @@ def send_style():
     return static_file('style.css', root = './')
 
 if __name__ == '__main__':
-    run(debug = config['imgs.debug'])
+    run()
