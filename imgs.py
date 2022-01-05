@@ -48,30 +48,38 @@ def upload_image():
     # Handle request from CLI
     if request.files.get('image'):
         file = request.files.get('image')
-        if file.content_type in config['imgs.allowed_mime_types']:
-            image_name = upload_file(file)
-            return get_image_url(image_name) + '\n'
-        else:
-            # Prevent recource leek. Force close buffered file
-            request.body.close()
-            response.status = 415
-            return 'Error: bad file MIME type\n'
+        rq = 'cli'
     # Handle request from web-browser
     elif request.files.get('image_web'):
         file = request.files.get('image_web')
+        rq = 'web'
+
+    if config['imgs.allowed_mime_types'] == '*':
+        # Skip MIME checking.
+        image_name = upload_file(file)
+    else:
         if file.content_type in config['imgs.allowed_mime_types']:
+            # Upload file!
             image_name = upload_file(file)
-            return template('index.tpl',
-                uploaded = True, not_found = False, bad_mime_type = False,
-                base_url = get_base_url(), image_url = get_image_url(image_name))
         else:
+            # Show MIME type error!
             # Prevent recource leek. Force close buffered file
             request.body.close()
             response.status = 415
-            return template('index.tpl',
-                uploaded = False, not_found = False, bad_mime_type = True,
-                allowed_mime_types = config['imgs.allowed_mime_types'],
-                base_url = get_base_url(), image_url = 'None')
+            if rq == 'cli':
+                return 'Error: bad file MIME type\n'
+            else:
+                return template('index.tpl',
+                    uploaded = False, not_found = False, bad_mime_type = True,
+                    allowed_mime_types = config['imgs.allowed_mime_types'],
+                    base_url = get_base_url(), image_url = 'None')
+    # Return 200 OK
+    if rq == 'cli':
+        return get_image_url(image_name) + '\n'
+    else:
+        return template('index.tpl',
+            uploaded = True, not_found = False, bad_mime_type = False,
+            base_url = get_base_url(), image_url = get_image_url(image_name))
 
 @get('/<image_name>')
 def send_image(image_name):
