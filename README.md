@@ -34,12 +34,16 @@ imgs will launched on `127.0.0.1:5000`. Set up reverse proxy server. I recommed 
 server {
     listen 80;
     server_name yourdomain.tld;
+    root /path/to/imgs/root;
 
     location / {
-        root /path/to/imgs/root;
         auth_basic "Authentication required";
         auth_basic_user_file /path/to/.htpasswd;
         proxy_pass http://127.0.0.1:5000;
+    }
+
+    location ~* ^/favicon.ico$ {
+        try_files $uri $uri/ =404;
     }
 
     location ~* \..* {
