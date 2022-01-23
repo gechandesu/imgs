@@ -65,6 +65,6 @@ sudo cp imgs /usr/bin/imgs
 
 ## Nautilus integration
 
-Push files to your imgs instance via GNOME Files (former name: Nautilus). Depends packages: curl, notyfy-send.
+Push files to your imgs instance via GNOME Files (former name: Nautilus). Depends on: curl, libnotify (notify-send utility).
 
 Just place **Upload to imgs** script into **~/.local/share/nautilus/scripts/** directory.
