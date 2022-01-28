@@ -19,6 +19,8 @@ imgs_check_vars() {
     fi
 }
 
+imgs_check_vars
+
 [ "$IMGSDEBUG" ] && date +"[%d %b %Y %H:%M:%S] Started" >> "$IMGSLOG"
 
 while read -r file; do
