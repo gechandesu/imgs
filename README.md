@@ -68,3 +68,14 @@ sudo cp imgs /usr/bin/imgs
 Push files to your imgs instance via GNOME Files (former name: Nautilus). Depends on: curl, libnotify (notify-send utility).
 
 Just place **Upload to imgs** script into **~/.local/share/nautilus/scripts/** directory.
+
+# Development
+
+You can run the project on your machine by installing **gunicorn**:
+```bash
+pip install gunicorn
+```
+then run the following command to launch the server locally:
+```bash
+gunicorn imgs:app --reload --bind :5000
+```
