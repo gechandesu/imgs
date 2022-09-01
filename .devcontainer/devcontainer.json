@@ -47,7 +47,7 @@
 	"forwardPorts": [5000],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pip3 install --user -r requirements.txt && pip install gunicorn && gunicorn imgs:app --reload --bind :5000",
+	"postCreateCommand": "pip3 install --user -r requirements.txt && pip install gunicorn",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
