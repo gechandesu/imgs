@@ -1,15 +1,16 @@
 body {
-    background-color: #fff;
+    background-color: rgb(34, 34, 34);
     font-family: 'Ubuntu Mono', monospace;
     max-width: 720px;
     margin: 0 auto;
     text-align: center;
+    color: #fff;
 }
 
 main { margin: 4rem 2rem; }
 .not-found, .bad-mime-type { margin-bottom: 2rem; }
 
-a, a:visited { color: #000; }
+a, a:visited { color: #fff; }
 
 img { width: 100%; }
 
@@ -46,7 +47,8 @@ img { width: 100%; }
 .copy-to-clipboard {
     display: flex;
     margin: 2rem 0;
-    border: 1px solid #000000;
+    border: 1px solid #000;
+    color: #000
 }
 
 .copy-to-clipboard input[type=text] {

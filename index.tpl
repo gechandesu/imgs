@@ -24,7 +24,7 @@
 
     <div id="drop-area" class="drop-area" ondragover="dragOverHover();" ondragleave="dragLeave()">
         <form action="/" method="POST" enctype="multipart/form-data">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"· fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/></svg><br>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"· fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/></svg><br>
             <label for="image_web" class="file-input-label"><b> Choose images</b> or drag and drop it here</label>
             <input class="file-input" type="file" multiple onchange="this.form.submit();" name='image_web' id='image_web'>
         </form>
@@ -70,14 +70,12 @@
         </script>
 
         <img src="{{ image_url }}" alt="{{ image_url }}" width="640">
-
-        <p>- - -</p>
     % end
 
     <div class="logo">
         <pre> __<br>|__| _____   ____  ______<br>|  |/     \ / ___\/  ___/<br>|  |  Y Y  / /_/  \___ \<br>|__|__|_|  \___  /____  ><br>         \/_____/     \/</pre>
     </div>
-    <p><a href="https://gitea.gch.icu/ge/imgs" target="_blank">v1.1</a></p>
+    <p><a href="https://github.com/AdrianR25/imgs" target="_blank">v1.2</a></p>
 
 </main>
 </body>
