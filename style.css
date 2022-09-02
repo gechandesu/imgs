@@ -1,6 +1,9 @@
 body {
+
+    --font-family: 'Ubuntu Mono', monospace;
+
     background-color: rgb(34, 34, 34);
-    font-family: 'Ubuntu Mono', monospace;
+    font-family: var(--font-family);
     max-width: 720px;
     margin: 0 auto;
     text-align: center;
@@ -57,6 +60,9 @@ img { width: 100%; }
     padding: 12px 20px;
     border: none;
     outline: none;
+    color: #fff;
+    background-color: #000;
+    font-family: var(--font-family);
 }
 
 .copy-to-clipboard button {
@@ -66,8 +72,10 @@ img { width: 100%; }
     cursor: pointer;
     text-align: center;
     border: none;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #fff;
+    color: #000;
+    font-family: var(--font-family);
+    font-size: medium;
 }
 
 /* cURL command */
