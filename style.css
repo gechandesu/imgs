@@ -1,15 +1,19 @@
 body {
-    background-color: #fff;
-    font-family: 'Ubuntu Mono', monospace;
+
+    --font-family: 'Ubuntu Mono', monospace;
+
+    background-color: rgb(34, 34, 34);
+    font-family: var(--font-family);
     max-width: 720px;
     margin: 0 auto;
     text-align: center;
+    color: #fff;
 }
 
 main { margin: 4rem 2rem; }
 .not-found, .bad-mime-type { margin-bottom: 2rem; }
 
-a, a:visited { color: #000; }
+a, a:visited { color: #fff; }
 
 img { width: 100%; }
 
@@ -46,26 +50,32 @@ img { width: 100%; }
 .copy-to-clipboard {
     display: flex;
     margin: 2rem 0;
-    border: 1px solid #000000;
+    border: 1px solid #000;
+    color: #000
 }
 
 .copy-to-clipboard input[type=text] {
     flex: 50%;
     width: 100%;
-    padding: 12px 20px;
+    padding: 10px 20px;
     border: none;
     outline: none;
+    color: #fff;
+    background-color: #000;
+    font-family: var(--font-family);
 }
 
 .copy-to-clipboard button {
-    padding: 12px 20px;
+    padding: 10px 20px;
     margin: 0;
     min-width: 120px;
     cursor: pointer;
     text-align: center;
     border: none;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #fff;
+    color: #000;
+    font-family: var(--font-family);
+    font-size: medium;
 }
 
 /* cURL command */
