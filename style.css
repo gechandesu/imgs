@@ -15,11 +15,7 @@ main { margin: 4rem 2rem; }
 
 a, a:visited { color: #fff; }
 
-img { width: 100%; }
-
-audio {
-    width: 640px;
-}
+img, video, audio { width: 100%; }
 
 /* Drag and Drop */
 .drop-area {
