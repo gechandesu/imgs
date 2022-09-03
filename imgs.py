@@ -81,6 +81,7 @@ def upload_image():
     else:
         return template('index.tpl',
             uploaded = True, not_found = False, bad_mime_type = False,
+            media_type = file.content_type.split('/')[0],
             base_url = get_base_url(), image_url = get_image_url(image_name))
 
 @get('/<image_name>')

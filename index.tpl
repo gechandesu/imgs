@@ -68,8 +68,14 @@
                 copyButton.innerHTML = "Copy URL";
             }
         </script>
-
-        <img src="{{ image_url }}" alt="{{ image_url }}" width="640">
+        % if media_type == 'image':
+            <img src="{{ image_url }}" alt="{{ image_url }}" width="640">
+        %  elif media_type == 'video':
+          <video width="640" controls>
+            <source src="{{ image_url }}">
+            Your browser does not support the video tag.
+          </video>
+        % end
     % end
 
     <div class="logo">
