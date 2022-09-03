@@ -10,12 +10,12 @@ from bottle import run, get, post, request, response, error, template, static_fi
 
 config = app().config.load_config('./imgs.ini')
 
-def generate_image_name(image: str) -> str:
+def generate_media_name(media: str) -> str:
     name = ''
     chars = string.ascii_letters + string.digits + '-_'
-    while len(name) <= int(config['imgs.image_name_lenght']) - 1:
+    while len(name) <= int(config['imgs.file_name_lenght']) - 1:
         name = name + random.choice(chars)
-    return name + os.path.splitext(image)[1].lower()
+    return name + os.path.splitext(media)[1].lower()
 
 def get_base_url():
     try:
@@ -24,14 +24,14 @@ def get_base_url():
         base_url = request.url
     return base_url
 
-def get_image_url(image_name: str) -> str:
-    image_url = get_base_url() + '/' + image_name
-    return image_url.replace('//', '/').replace(':/', '://')
+def get_media_url(media_name: str) -> str:
+    media_url = get_base_url() + '/' + media_name
+    return media_url.replace('//', '/').replace(':/', '://')
 
 def upload_file(file):
-    image_name = generate_image_name(file.filename)
-    file.save(os.path.join(config['imgs.uploads_dir'], image_name))
-    return image_name
+    media_name = generate_media_name(file.filename)
+    file.save(os.path.join(config['imgs.uploads_dir'], media_name))
+    return media_name
 
 @error(404)
 def error404(error):
@@ -46,23 +46,23 @@ def index():
         base_url = get_base_url())
 
 @post('/')
-def upload_image():
+def upload_media():
     # Handle request from CLI
-    if request.files.get('image'):
-        file = request.files.get('image')
+    if request.files.get('file'):
+        file = request.files.get('file')
         rq = 'cli'
     # Handle request from web-browser
-    elif request.files.get('image_web'):
-        file = request.files.get('image_web')
+    elif request.files.get('media_web'):
+        file = request.files.get('media_web')
         rq = 'web'
 
     if config['imgs.allowed_mime_types'] == '*':
         # Skip MIME checking.
-        image_name = upload_file(file)
+        media_name = upload_file(file)
     else:
         if file.content_type in config['imgs.allowed_mime_types']:
             # Upload file!
-            image_name = upload_file(file)
+            media_name = upload_file(file)
         else:
             # Show MIME type error!
             # Prevent recource leek. Force close buffered file
@@ -74,19 +74,19 @@ def upload_image():
                 return template('index.tpl',
                     uploaded = False, not_found = False, bad_mime_type = True,
                     allowed_mime_types = config['imgs.allowed_mime_types'],
-                    base_url = get_base_url(), image_url = 'None')
+                    base_url = get_base_url(), media_url = 'None')
     # Return 200 OK
     if rq == 'cli':
-        return get_image_url(image_name) + '\n'
+        return get_media_url(media_name) + '\n'
     else:
         return template('index.tpl',
             uploaded = True, not_found = False, bad_mime_type = False,
             media_type = file.content_type.split('/')[0],
-            base_url = get_base_url(), image_url = get_image_url(image_name))
+            base_url = get_base_url(), media_url = get_media_url(media_name))
 
-@get('/<image_name>')
-def send_image(image_name):
-    return static_file(image_name, root = config['imgs.uploads_dir'])
+@get('/<media_name>')
+def send_media(media_name):
+    return static_file(media_name, root = config['imgs.uploads_dir'])
 
 @get('/style.css')
 def send_style():

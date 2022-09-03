@@ -33,9 +33,9 @@
                     stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3" />
                 </svg><br>
-                <label for="image_web" class="file-input-label"><b> Choose images</b> or drag and drop it here</label>
-                <input class="file-input" type="file" multiple onchange="this.form.submit();" name='image_web'
-                    id='image_web'>
+                <label for="media_web" class="file-input-label"><b> Choose a file</b> or drag and drop it here</label>
+                <input class="file-input" type="file" multiple onchange="this.form.submit();" name='media_web'
+                    id='media_web'>
             </form>
         </div>
 
@@ -49,15 +49,15 @@
             }
         </script>
 
-        <p><b>or</b> upload images via cURL:</p>
+        <p><b>or</b> upload files via cURL:</p>
 
         <div class="curl">
-            <pre>curl -F 'image=@/path/to/image.jpg' {{ base_url }}</pre>
+            <pre>curl -F 'file=@/path/to/file' {{ base_url }}</pre>
         </div>
 
         % if uploaded:
             <div class="copy-to-clipboard">
-                <input type="text" value="{{ image_url }}" id="text-input">
+                <input type="text" value="{{ media_url }}" id="text-input">
                 <button onclick="CopyToClipboard()" onmouseout="mouseOut()">
                     <span id="copy-button">Copy URL</span>
                 </button>
@@ -78,15 +78,15 @@
                 }
             </script>
             % if media_type == 'image':
-                <img src="{{ image_url }}" alt="{{ image_url }}" width="640">
+                <img src="{{ media_url }}" alt="{{ media_url }}" width="640">
             % elif media_type == 'video':
                 <video width="640" controls>
-                    <source src="{{ image_url }}">
+                    <source src="{{ media_url }}">
                     Your browser does not support the video tag.
                 </video>
             % elif media_type == 'audio':
                 <audio id="audio-player" controls>
-                    <source src="{{ image_url }}">
+                    <source src="{{ media_url }}">
                     Your browser does not support the audio element.
                 </audio>
                 <script>
