@@ -17,6 +17,10 @@ a, a:visited { color: #fff; }
 
 img { width: 100%; }
 
+audio {
+    width: 640px;
+}
+
 /* Drag and Drop */
 .drop-area {
     position: relative;
