@@ -92,6 +92,10 @@ def send_image(image_name):
 def send_style():
     return static_file('style.css', root = './')
 
+@get('/favicon.ico')
+def send_favicon():
+    return static_file('favicon.ico', root = './')
+
 app = app()  # Create WSGI application
 
 if __name__ == '__main__':
