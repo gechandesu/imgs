@@ -92,6 +92,10 @@ def send_media(media_name):
 def send_style():
     return static_file('style.css', root = './')
 
+@get('/imgs.js')
+def send_script():
+    return static_file('imgs.js', root = './')
+
 @get('/favicon.ico')
 def send_favicon():
     return static_file('favicon.ico', root = './')

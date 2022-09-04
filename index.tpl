@@ -39,16 +39,6 @@
             </form>
         </div>
 
-        <script>
-            let dropArea = document.getElementById('drop-area');
-            function dragOverHover() {
-                dropArea.className = "drop-area dragover";
-            }
-            function dragLeave() {
-                dropArea.className = "drop-area";
-            }
-        </script>
-
         <p><b>or</b> upload files via cURL:</p>
 
         <div class="curl">
@@ -63,20 +53,6 @@
                 </button>
             </div>
 
-            <script>
-                let copyButton = document.getElementById("copy-button"),
-                    copyText = document.getElementById("text-input");
-
-                function CopyToClipboard() {
-                    copyText.select();
-                    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-                    document.execCommand("copy");
-                    copyButton.innerHTML = "Copied!";
-                }
-                function mouseOut() {
-                    copyButton.innerHTML = "Copy URL";
-                }
-            </script>
             % if media_type == 'image':
                 <img src="{{ media_url }}" alt="{{ media_url }}" width="640">
             % elif media_type == 'video':
@@ -89,12 +65,6 @@
                     <source src="{{ media_url }}">
                     Your browser does not support the audio element.
                 </audio>
-                <script>
-                    let audioPlayer = document.getElementById("audio-player");
-                    if (audioPlayer) {
-                        audioPlayer.volume = 0.5;
-                    }
-                </script>
             % end
         % end
 
@@ -104,6 +74,7 @@
         <p><a href="https://github.com/AdrianR25/imgs" target="_blank">v1.2</a></p>
 
     </main>
+    <script src="/imgs.js"></script>
 </body>
 
 </html>
