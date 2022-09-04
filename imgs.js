@@ -1,5 +1,5 @@
 // change drop area style when dragging a file
-let dropArea = document.getElementById('drop-area');
+const dropArea = document.getElementById('drop-area');
 function dragOverHover() {
     dropArea.className = "drop-area dragover";
 }
@@ -8,8 +8,8 @@ function dragLeave() {
 }
 
 // copy URL button
-let copyButton = document.getElementById("copy-button"),
-    copyText = document.getElementById("text-input");
+const copyButton = document.getElementById("copy-button");
+const copyText = document.getElementById("text-input");
 
 function CopyToClipboard() {
     copyText.select();
@@ -23,7 +23,7 @@ function mouseOut() {
 
 
 // set default volume to 50% for audio element
-let audioPlayer = document.getElementById("audio-player");
+const audioPlayer = document.getElementById("audio-player");
 if (audioPlayer) {
     audioPlayer.volume = 0.5;
 }
