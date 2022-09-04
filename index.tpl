@@ -48,7 +48,7 @@
         % if uploaded:
             <div class="copy-to-clipboard">
                 <input type="text" value="{{ media_url }}" id="text-input">
-                <button onclick="CopyToClipboard()" onmouseout="mouseOut()">
+                <button onclick="CopyToClipboard()">
                     <span id="copy-button">Copy URL</span>
                 </button>
             </div>
