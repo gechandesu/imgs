@@ -9,18 +9,20 @@ function dragLeave() {
 
 // copy URL button
 const copyButton = document.getElementById("copy-button");
-const copyText = document.getElementById("text-input");
 
 function CopyToClipboard() {
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-    document.execCommand("copy");
-    copyButton.innerHTML = "Copied!";
+    const copyText = document.getElementById("text-input").value;
+
+    navigator.clipboard.writeText(copyText).then(() => {
+        copyButton.innerHTML = "Copied!";
+    }, () => {
+        console.error('Could not copy text: ', err);
+    });
 }
+
 function mouseOut() {
     copyButton.innerHTML = "Copy URL";
 }
-
 
 // set default volume to 50% for audio element
 const audioPlayer = document.getElementById("audio-player");
