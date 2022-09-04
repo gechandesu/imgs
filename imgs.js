@@ -11,17 +11,19 @@ function dragLeave() {
 const copyButton = document.getElementById("copy-button");
 
 function CopyToClipboard() {
-    const copyText = document.getElementById("text-input").value;
+    const copyText = document.getElementById("text-input");
 
-    navigator.clipboard.writeText(copyText).then(() => {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(copyText.value).then(() => {
+            copyButton.innerHTML = "Copied!";
+        }, () => {
+            console.error('Could not copy text: ', err);
+        });
+    } else { // fallback for insecure environments 
+        copyText.select();
+        document.execCommand("copy");
         copyButton.innerHTML = "Copied!";
-    }, () => {
-        console.error('Could not copy text: ', err);
-    });
-}
-
-function mouseOut() {
-    copyButton.innerHTML = "Copy URL";
+    }
 }
 
 // set default volume to 50% for audio element
