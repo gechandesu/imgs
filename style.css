@@ -1,85 +1,100 @@
+:root {
+  --b: #000;
+  --w: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --b: #fff;
+    --w: #000;
+  }
+}
+
 body {
-    background-color: #fff;
-    font-family: 'Ubuntu Mono', monospace;
-    max-width: 720px;
-    margin: 0 auto;
-    text-align: center;
+  color: var(--b);
+  background-color: var(--w);
+  font-family: 'Ubuntu Mono', monospace;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 main { margin: 4rem 2rem; }
-.not-found, .bad-mime-type { margin-bottom: 2rem; }
-
-a, a:visited { color: #000; }
-
+a, a:visited { color: var(--b); }
 img { width: 100%; }
+.not-found, .bad-mime-type { margin-bottom: 2rem; }
+.logo pre {
+  display: flex;
+  justify-content: center;
+  text-align: left;
+}
 
 /* Drag and Drop */
 .drop-area {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 8rem;
-    padding: 25px;
-    border: 3px dashed #e1e1e1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  padding: 25px;
+  border: 3px dashed #e1e1e1;
 }
-
-.drop-area.dragover { border-color: #000; }
-
+.drop-area.dragover { border-color: var(--b); }
 .file-input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-    align-items: center;
-    opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  align-items: center;
+  opacity: 0;
 }
-
 .file-input-label {
-    display: block;
-    margin-top: 1rem;
+  display: block;
+  margin-top: 1rem;
 }
 
 /* Copy to clipboard */
 .copy-to-clipboard {
-    display: flex;
-    margin: 2rem 0;
-    border: 1px solid #000000;
+  display: flex;
+  margin: 2rem 0;
+  border: 1px solid var(--b);
 }
-
 .copy-to-clipboard input[type=text] {
-    flex: 50%;
-    width: 100%;
-    padding: 12px 20px;
-    border: none;
-    outline: none;
+  flex: 50%;
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  outline: none;
+  background-color: var(--w);
+  color: var(--b);
 }
-
 .copy-to-clipboard button {
-    padding: 12px 20px;
-    margin: 0;
-    min-width: 120px;
-    cursor: pointer;
-    text-align: center;
-    border: none;
-    background-color: #000000;
-    color: #ffffff;
+  padding: 12px 20px;
+  margin: 0;
+  min-width: 120px;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-color: var(--b);
+  color: var(--w);
 }
 
 /* cURL command */
 .curl pre {
-    text-align: left;
-    padding: 12px 20px;
-    font-size: 14px;
-    background: #000000;
-    color: #ffffff;
-    overflow-x: auto;
+  text-align: left;
+  padding: 12px 20px;
+  font-size: 14px;
+  background: var(--b);
+  color: var(--w);
+  overflow-x: auto;
 }
 
-.logo pre {
-    display: flex;
-    justify-content: center;
-    text-align: left;
+/* SVG  */
+svg {
+  color: var(--b);
+}
+svg path {
+  stroke: currentcolor;
 }
