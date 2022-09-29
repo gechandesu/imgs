@@ -77,7 +77,7 @@
     <div class="logo">
         <pre> __<br>|__| _____   ____  ______<br>|  |/     \ / ___\/  ___/<br>|  |  Y Y  / /_/  \___ \<br>|__|__|_|  \___  /____  ><br>         \/_____/     \/</pre>
     </div>
-    <p><a href="https://gitea.gch.icu/ge/imgs" target="_blank">v1.1</a></p>
+    <p><a href="https://git.nxhs.cloud/ge/imgs" target="_blank">v1.1</a></p>
 
 </main>
 </body>
