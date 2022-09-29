@@ -18,14 +18,18 @@ Clone repository and edit **imgs.ini**.
 
 Build Docker image:
 
-```bash
+```shell
 docker build --tag imgs .
 ```
 
 Run container from image. Replace **/path/to/your/uploads/dir** with path to directory where you want to store images:
 
-```
-sudo docker run --rm --name imgs --detach --publish 127.0.0.1:5000:5000 --volume /path/to/your/uploads/dir:/opt/imgs/uploads imgs
+```shell
+docker run -d \
+    --name imgs \
+    --publish 127.0.0.1:5000:5000 \
+    --volume /path/to/your/uploads/dir:/opt/imgs/uploads \
+    imgs
 ```
 
 imgs will launched on `127.0.0.1:5000`. Set up reverse proxy server. I recommed to use basic authentication to prevent abuses. Nginx virtual host example:
@@ -59,7 +63,7 @@ server {
 
 imgs has a simple CLI tool based on curl. Copy **imgs** script to your PATH.
 
-```bash
+```shell
 sudo cp imgs /usr/bin/imgs
 ```
 
@@ -68,3 +72,7 @@ sudo cp imgs /usr/bin/imgs
 Push files to your imgs instance via GNOME Files (former name: Nautilus). Depends on: curl, libnotify (notify-send utility).
 
 Just place **Upload to imgs** script into **~/.local/share/nautilus/scripts/** directory.
+
+```shell
+DIR=~/.local/share/nautilus/scripts/; mkdir -p $DIR && cp Upload\ to\ imgs $DIR
+```
