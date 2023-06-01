@@ -1,6 +1,5 @@
-FROM alpine:latest
-RUN apk update && apk add python3 py3-pip
-ADD . /opt/imgs
+FROM python:3.9-alpine
+ADD app/ /opt/imgs
 RUN mkdir -p /opt/imgs/uploads
 WORKDIR /opt/imgs
 RUN pip install --upgrade pip && pip install --requirement requirements.txt
