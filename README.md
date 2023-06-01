@@ -72,13 +72,13 @@ server {
 
     ProxyRequests off
     ProxyPreserveHost on
-	<LocationMatch "^/.">
+    <LocationMatch "^/.">
         Allow From All
         Satisfy Any
         ProxyPass "http://127.0.0.1:5000/"
         ProxyPassReverse "http://127.0.0.1:5000/"
     </LocationMatch>
-   	<Location />
+    <Location />
         AuthName "Authentication required"
         AuthType Basic
         AuthBasicProvider file
@@ -86,7 +86,7 @@ server {
         Require valid-user
         ProxyPass "http://127.0.0.1:5000/"
         ProxyPassReverse "http://127.0.0.1:5000/"
-   	</Location>
+    </Location>
 
    
 
