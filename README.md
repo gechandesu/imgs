@@ -32,7 +32,9 @@ docker run -d \
     imgs
 ```
 
-imgs will launched on `127.0.0.1:5000`. Set up reverse proxy server. I recommed to use basic authentication to prevent abuses. Nginx virtual host example:
+imgs will launched on `127.0.0.1:5000`. Set up reverse proxy server. I recommed to use basic authentication to prevent abuses. 
+
+## Nginx virtual host example:
 
 ```nginx
 server {
@@ -55,6 +57,41 @@ server {
         proxy_pass http://127.0.0.1:5000;
     }
 }
+```
+
+## Apache2 virtual host example
+
+```apache2
+
+<VirtualHost *:80>
+    ServerName yourdomain.tld
+ 	AllowEncodedSlashes     NoDecode
+
+    RewriteEngine On
+	RemoteIPHeader X-Remote-Ip
+
+    ProxyRequests off
+    ProxyPreserveHost on
+	<LocationMatch "^/.">
+	   Allow From All
+       Satisfy Any
+       ProxyPass "http://127.0.0.1:5000/"
+       ProxyPassReverse "http://127.0.0.1:5000/"
+    </LocationMatch>
+   	<Location />
+        AuthName "Authentication required"
+        AuthType Basic
+        AuthBasicProvider file
+        AuthUserFile "/path/to/.htpasswd"
+        Require valid-user
+		ProxyPass "http://127.0.0.1:5000/"
+    	ProxyPassReverse "http://127.0.0.1:5000/"
+   	</Location>
+
+   
+
+</VirtualHost>
+
 ```
 
 # Additional
