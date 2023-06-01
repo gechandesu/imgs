@@ -30,6 +30,8 @@ def get_image_url(image_name: str) -> str:
 
 def upload_file(file):
     image_name = generate_image_name(file.filename)
+    while os.path.exists(os.path.join(config['imgs.uploads_dir'], image_name)):
+        image_name = generate_image_name(file.filename)
     file.save(os.path.join(config['imgs.uploads_dir'], image_name))
     return image_name
 
