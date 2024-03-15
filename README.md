@@ -1,4 +1,6 @@
-# imgs
+# imgs fork
+
+Note : the original author is MIA so i'm maintaining this fork. For now i'm not renaming it or removing its credits.
 
 imgs is a minimalictic image sharing web app written with Bottle framework.
 
@@ -13,26 +15,34 @@ Features:
 See deployment options in Bottle documentation: https://bottlepy.org/docs/dev/deployment.html
 
 # Run imgs in Docker
-
-Clone repository and edit **imgs.ini**.
-
-Build Docker image:
-
-```shell
-docker build --tag imgs .
-```
-
-Run container from image. Replace **/path/to/your/uploads/dir** with path to directory where you want to store images:
+Run container from docker.io image. Replace **/path/to/your/uploads/dir** with path to directory where you want to store images:
 
 ```shell
 docker run -d \
     --name imgs \
     --publish 127.0.0.1:5000:5000 \
     --volume /path/to/your/uploads/dir:/opt/imgs/uploads \
-    imgs
+    baptisterajaut/imgs:latest
 ```
 
-imgs will launched on `127.0.0.1:5000`. Set up reverse proxy server. I recommed to use basic authentication to prevent abuses. 
+imgs will launched on `127.0.0.1:5000`. 
+
+# Editing imgs.ini 
+
+
+You can add a volume to use a custom imgs.ini if required.
+
+```shell
+docker run -d \
+    --name imgs \
+    --publish 127.0.0.1:5000:5000 \
+    --volume /path/to/your/uploads/dir:/opt/imgs/uploads \
+    --vlume /path/to/your/imgs.ini:/opt/imgs/imgs.ini \
+    baptisterajaut/imgs:latest
+
+```
+
+Imgs has no authentification system builtin ; if you require so, please use a reverse proxy.
 
 ## Nginx virtual host example:
 
