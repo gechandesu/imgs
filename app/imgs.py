@@ -1,4 +1,4 @@
-__version__ = '1.1'
+__version__ = '1.2'
 
 import os
 import random
@@ -28,11 +28,20 @@ def get_image_url(image_name: str) -> str:
     image_url = get_base_url() + '/' + image_name
     return image_url.replace('//', '/').replace(':/', '://')
 
-def upload_file(file):
-    image_name = generate_image_name(file.filename)
-    while os.path.exists(os.path.join(config['imgs.uploads_dir'], image_name)):
-        image_name = generate_image_name(file.filename)
-    file.save(os.path.join(config['imgs.uploads_dir'], image_name))
+def upload_file(file, use_original_name: bool = False, overwrite_existing: bool = False):
+    image_name = file.filename if use_original_name else generate_image_name(file.filename)
+
+    if use_original_name and not overwrite_existing:
+        base_name, extension = os.path.splitext(image_name)
+        counter = 1
+        while os.path.exists(os.path.join(config['imgs.uploads_dir'], image_name)):
+            image_name = f"{base_name}_{counter}{extension}"
+            counter += 1
+    elif not use_original_name:
+        while os.path.exists(os.path.join(config['imgs.uploads_dir'], image_name)):
+            image_name = generate_image_name(file.filename)
+
+    file.save(os.path.join(config['imgs.uploads_dir'], image_name),overwrite=True)
     return image_name
 
 @error(404)
@@ -50,6 +59,8 @@ def index():
 @post('/')
 def upload_image():
     # Handle request from CLI
+    use_original_name = request.forms.get('use_original_name') == 'on'
+    overwrite_existing = request.forms.get('overwrite_existing') == 'on'
     if request.files.get('image'):
         file = request.files.get('image')
         rq = 'cli'
@@ -60,11 +71,11 @@ def upload_image():
 
     if config['imgs.allowed_mime_types'] == '*':
         # Skip MIME checking.
-        image_name = upload_file(file)
+        image_name = upload_file(file,use_original_name, overwrite_existing)
     else:
         if file.content_type in config['imgs.allowed_mime_types']:
             # Upload file!
-            image_name = upload_file(file)
+            image_name = upload_file(file,use_original_name, overwrite_existing)
         else:
             # Show MIME type error!
             # Prevent recource leek. Force close buffered file

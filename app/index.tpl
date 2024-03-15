@@ -4,6 +4,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>imgs</title>
     <link rel="stylesheet" href="/style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const useOriginalNameCheckbox = document.querySelector('input[name="use_original_name"]');
+            const overwriteExistingCheckbox = document.querySelector('input[name="overwrite_existing"]');
+
+            function toggleOverwriteCheckbox() {
+                overwriteExistingCheckbox.disabled = !useOriginalNameCheckbox.checked;
+                if (!useOriginalNameCheckbox.checked) {
+                    overwriteExistingCheckbox.checked = false;
+                }
+            }
+
+            useOriginalNameCheckbox.addEventListener('change', toggleOverwriteCheckbox);
+
+            // Initial check on page load
+            toggleOverwriteCheckbox();
+        });
+    </script>
+
 </head>
 <body>
 <main>
@@ -22,21 +41,30 @@
         </div>
     % end
 
-    <div id="drop-area" class="drop-area" ondragover="dragOverHover();" ondragleave="dragLeave()">
-        <form action="/" method="POST" enctype="multipart/form-data">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"· fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/></svg><br>
-            <label for="image_web" class="file-input-label"><b> Choose images</b> or drag and drop it here</label>
+    
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <div class="file-upload-container drop-area" id="drop-area" ondragover="dragOverHover();" ondragleave="dragLeave()">
             <input class="file-input" type="file" multiple onchange="this.form.submit();" name='image_web' id='image_web'>
-        </form>
-    </div>
+            <label for="image_web" class="file-input-label">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/></svg><br>
+                <b>Choose images</b> or drag and drop them here
+            </label>
+        </div>
+        <div class="options">
+            <label><input type="checkbox" name="use_original_name"> Use original file name</label><br>
+            <label><input type="checkbox" name="overwrite_existing"> Overwrite if file exists</label>
+        </div>
+    </form>
+
+
 
     <script>
         let dropArea = document.getElementById('drop-area');
         function dragOverHover() {
-            dropArea.className = "drop-area dragover";
+            dropArea.className = "file-upload-container drop-area dragover";
         }
         function dragLeave() {
-            dropArea.className = "drop-area";
+            dropArea.className = "file-upload-container drop-area";
         }
     </script>
 
@@ -77,7 +105,7 @@
     <div class="logo">
         <pre> __<br>|__| _____   ____  ______<br>|  |/     \ / ___\/  ___/<br>|  |  Y Y  / /_/  \___ \<br>|__|__|_|  \___  /____  ><br>         \/_____/     \/</pre>
     </div>
-    <p><a href="https://git.nxhs.cloud/ge/imgs" target="_blank">v1.1</a></p>
+    <p><a href="https://git.nxhs.cloud/ge/imgs" target="_blank">v1.2/a></p>
 
 </main>
 </body>
