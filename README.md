@@ -1,6 +1,6 @@
 # imgs fork
 
-Note : the original author is MIA so i'm maintaining this fork. For now i'm not renaming it or removing its credits.
+Note : the original author is MIA so we are maintaining this fork.
 
 imgs is a minimalictic image sharing web app written with Bottle framework.
 
