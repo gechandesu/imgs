@@ -1,8 +1,8 @@
-# imgs fork
+# imgs by Bayesia
 
-Note : the original author is MIA so i'm maintaining this fork. For now i'm not renaming it or removing its credits.
+`Note : as the orignal imgs maker is MIA, Bayesia is for now maintaining the project.`
 
-imgs is a minimalictic image sharing web app written with Bottle framework.
+Imgs is a minimalictic image sharing web app written with Bottle framework.
 
 No database. No image compression. No time limits. No additional dependencies.
 
@@ -104,22 +104,37 @@ server {
 
 ```
 
-# Additional
+# Additional scripts
 
-## imgs client with CLI
+## Requirements
 
-imgs has a simple CLI tool based on curl. Copy **imgs** script to your PATH.
+
+All scripts require `curl`.
+
+The scripts will try to source `"$HOME"/.config/.imgsremote` if it exists and use the following variables :
+
+`IMGSREMOTE` : remote imgs instance URI. (no default)
+`IMGSDEBUG` : enables verbose mode and logging (not set/false by default)
+`IMGSLOG` : path to logfile. Default: ~/imgs_debug.log
+
+
+`IMGSREMOTE` is highly recommended to be set for the cli AND is required for the gnome files script.
+
+
+## imgs CLI
+
+imgs has a simple CLI tool based on curl. Copy the **imgscli** script to your PATH.
 
 ```shell
-sudo cp imgs /usr/bin/imgs
+sudo cp scripts/imgscli /usr/bin/
 ```
 
 ## Nautilus integration
 
 Push files to your imgs instance via GNOME Files (former name: Nautilus). Depends on: curl, libnotify (notify-send utility).
 
-Just place **Upload to imgs** script into **~/.local/share/nautilus/scripts/** directory.
+Just place **imgs-upload** script into **~/.local/share/nautilus/scripts/** directory.
 
 ```shell
-DIR=~/.local/share/nautilus/scripts/; mkdir -p $DIR && cp Upload\ to\ imgs $DIR
+DIR=~/.local/share/nautilus/scripts/; mkdir -p $DIR && cp scripts/imgs-upload $DIR
 ```

@@ -1,11 +1,14 @@
 #!/bin/sh
-# imgs CLI https://git.nxhs.cloud/ge/imgs
+# imgs CLI 
+# made originally by https://git.nxhs.cloud/ge/imgs
+# Maintained by bayesia, but we haven't ever touched this script behiavour
 
 imgs_usage() {
 cat <<- EOF
+Simple imgs client
 Upload images to remote imgs server.
 
-Usage: imgs [-rvh] <file>...
+Usage: imgscli [-rvh] <file>...
 
 Options:
     -r, --remote    remote imgs instance URI e.g. https://user:password@example.org
@@ -50,9 +53,9 @@ shift $((OPTIND - 1))  # shift for parse positional args
 IMGSLOG="${IMGSLOG:-$HOME/imgs_debug.log}"
 [ -n "$IMGSREMOTE" ] && return 0  # exit from func if variable is set
 
-if [ -f "$HOME"/.imgsremote ]; then
+if [ -f "$HOME"/.config/.imgsremote ]; then
     # shellcheck source=/dev/null
-    . "$HOME"/.imgsremote
+    . "$HOME"/.config/.imgsremote
 fi
 
 if [ -z "$IMGSREMOTE" ]; then

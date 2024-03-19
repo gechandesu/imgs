@@ -1,4 +1,5 @@
 FROM alpine:latest
+MAINTAINER "Bayesia-SAS'
 RUN apk update && apk add python3 py3-pip --no-cache
 RUN pip install gunicorn --no-cache-dir --break-system-packages
 ADD app/ /opt/imgs

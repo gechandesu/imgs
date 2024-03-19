@@ -2,13 +2,15 @@
 # This is an imgs https://git.nxhs.cloud/ge/imgs "integration" for Nautilus.
 # Place this script into path: $HOME/.local/share/nautilus/scripts
 # See more info at: <https://help.ubuntu.com/community/NautilusScriptsHowto>
+# Maintained by bayesia, but we haven't ever touched this script behiavour
+
 
 IMGSLOG="${IMGSLOG:-$HOME/imgs_debug.log}"
 [ -n "$IMGSREMOTE" ] && return 0  # exit from func if variable is set
 
-if [ -f "$HOME"/.imgsremote ]; then
+if [ -f "$HOME"/.config/.imgsremote ]; then
     # shellcheck source=/dev/null
-    . "$HOME"/.imgsremote
+    . "$HOME"/.config/.imgsremote
 fi
 
 if [ -z "$IMGSREMOTE" ]; then
